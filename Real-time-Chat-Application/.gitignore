@@ -1,0 +1,50 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+config/config.env
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Build directories
+build/
+dist/
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+
+# Dependency directories
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE / Editor specific files
+.vscode/
+.idea/
+
+# Operating system specific files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Prettier and ESLint
+eslint-*
+prettier-*
+
+# SASS/SCSS build files
+*.css
+
+# JWT Secret (If it's not in environment variables)
+*.jwt-secret
+
+# Miscellaneous
+*.pid
+*.seed

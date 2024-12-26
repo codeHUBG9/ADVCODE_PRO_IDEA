@@ -7,7 +7,7 @@ const authRoutes = require("./routes/auth");
 const Message = require("./models/Message");
 const cors = require("cors");
 const path = require("path");
-
+const morgan = require("morgan");
 
 // Load environment variables
 const envFile = process.env.NODE_ENV === "production" 
@@ -20,7 +20,16 @@ require("dotenv").config({
 
 // Initialize Express
 const app = express();
+
+// Enable CORS
 app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',  // Adjust your front-end origin here
+}));
+
+// Use Morgan for logging requests (combined for detailed logs)
+app.use(morgan("combined"));  // Use 'tiny' or 'dev' for simpler logs
+
 app.use(express.json());
 
 // MongoDB Connection
@@ -33,7 +42,8 @@ app.use("/api/auth", authRoutes);
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "*",  // Allow all origins for now
+    methods: ["GET", "POST"],
   },
 });
 

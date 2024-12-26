@@ -12,20 +12,22 @@ const App = () => {
 
   useEffect(() => {
     const ws = connectWebSocket(
-      "ws://localhost:8080", 
+      "ws://localhost:5000", 
       (data) => {
         if (data.type === "message") {
           setMessages((prev) => [...prev, data]);
         } else if (data.type === "user_list") {
           setUsers(data.users);
         }
-      }
+      },
+      () => console.log("WebSocket connection established"), // onOpen callback
+      () => console.log("WebSocket connection closed")  // onClose callback
     );
-
+  
     setSocket(ws);
-
+  
     return () => {
-      ws.close(); // Cleanup connection on unmount
+      ws.close();  // Cleanup on unmount
     };
   }, []);
 

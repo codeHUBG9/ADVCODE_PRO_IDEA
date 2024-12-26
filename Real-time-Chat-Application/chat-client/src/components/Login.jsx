@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Typography } from "@mui/material";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:5000/api/auth/login", {
         username,
-        password,
+        password,  
       });
 
       if (response.data.token) {
         // Save token in local storage
         localStorage.setItem("token", response.data.token);
-        history.push("/chat"); // Redirect to the chat room
+        navigate("/chat"); // Redirect to the chat room
       }
     } catch (err) {
       setError("Invalid username or password");

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ChatRoom from "./components/ChatRoom";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -37,21 +37,12 @@ const App = () => {
 
   return (
     <Router>
-      <Switch>
-        <Route exact path="/chat">
-          <ChatRoom messages={messages} users={users} sendMessage={sendMessage} />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/register">
-          <Register />
-        </Route>
-        <Route exact path="/">
-          <h2>Welcome to the Chat App</h2>
-          <p>To start chatting, navigate to the <a href="/chat">Chat Room</a></p>
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/chat" element={<ChatRoom messages={messages} users={users} sendMessage={sendMessage} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<h2>Welcome to the Chat App</h2>} />
+      </Routes>
     </Router>
   );
 };
